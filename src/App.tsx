@@ -1,9 +1,12 @@
-import { Navbar } from "./components/Navbar";
+import { Chat } from "./components/Chat";
+import { Layout } from "./components/Layout";
 
 function App() {
   return (
     <>
-      <Navbar />
+      <Layout>
+        <Chat />
+      </Layout>
     </>
   );
 }
