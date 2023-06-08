@@ -1,10 +1,9 @@
-import { useState } from "react";
-import { Typography } from "@mui/material";
+import { Navbar } from "./components/Navbar";
 
 function App() {
   return (
     <>
-      <Typography variant="h1">Muzz Chat</Typography>
+      <Navbar />
     </>
   );
 }
