@@ -3,9 +3,9 @@ import { IUser } from "../types/user";
 
 export const contacts: IContact[] = [
   {
-    id: "123456",
-    name: "Dave walker",
-    avatar: "DW",
+    id: "9876",
+    name: "contact 1",
+    avatar: "c1",
   },
   {
     id: "654321",
