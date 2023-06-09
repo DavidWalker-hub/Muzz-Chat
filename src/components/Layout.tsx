@@ -61,7 +61,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             <Divider />
             <List sx={{ width: "100%" }}>
               {contacts.map((contact) => (
-                <Contact contact={contact} />
+                <Contact contact={contact} key={contact.id} />
               ))}
             </List>
           </Box>

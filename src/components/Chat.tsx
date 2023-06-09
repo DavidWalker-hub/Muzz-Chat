@@ -76,7 +76,7 @@ export const Chat: React.FC = () => {
             const groupedMessage =
               timeGap < 20 && message.sender === messages[i + 1].sender;
             return (
-              <>
+              <React.Fragment key={`${message.sender} - ${message.timeStamp}`}>
                 <Typography
                   alignSelf={isUserMessage ? "flex-end" : "flex-start"}
                   sx={{
@@ -100,7 +100,7 @@ export const Chat: React.FC = () => {
                 >
                   {format(message.timeStamp, "EEEE do HH:mm")}
                 </Typography>
-              </>
+              </React.Fragment>
             );
           })}
         </Grid>
