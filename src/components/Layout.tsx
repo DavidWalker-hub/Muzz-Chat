@@ -71,6 +71,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             flexGrow: 1,
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: `${drawerWidth}px`,
+            height: "calc(100vh - 64px)",
           }}
         >
           {children}
