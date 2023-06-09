@@ -1,4 +1,5 @@
 import { IContact } from "../types/contact";
+import { IUser } from "../types/user";
 
 export const contacts: IContact[] = [
   {
@@ -12,3 +13,9 @@ export const contacts: IContact[] = [
     avatar: "W",
   },
 ];
+
+export const defaultUser: IUser = {
+  id: "123456",
+  name: "Dave Walker",
+  profileInformation: {},
+};

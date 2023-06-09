@@ -12,11 +12,8 @@ import { differenceInSeconds, format } from "date-fns";
 import { useChat } from "../contexts/chat.context";
 
 export const Chat: React.FC = () => {
-  const userId = "123456";
-  const contactId = "654321";
-
   const [typedMessage, setTypedMessage] = useState<string>("");
-  const { sortedConversation, sendMessage } = useChat();
+  const { sortedConversation, sendMessage, userId, contactId } = useChat();
 
   const handleSendMessage = () => {
     const newMessage = {
