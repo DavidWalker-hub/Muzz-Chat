@@ -35,7 +35,8 @@ export const Layout: React.FC<Props> = ({ children }) => {
             {/* Purely for the purpose of sending messages back to the user */}
             <Tabs
               sx={{ minWidth: 200 }}
-              indicatorColor="primary"
+              // indicatorColor="secondary"
+              TabIndicatorProps={{ sx: { color: "white" } }}
               value={userId}
               onChange={(e, value) => {
                 console.log("e", e.target);
@@ -43,8 +44,8 @@ export const Layout: React.FC<Props> = ({ children }) => {
                 setUserId(value);
               }}
             >
-              <Tab label="user1" value={"123456"} />
-              <Tab label="user2" value={"654321"} />
+              <Tab label="user 1" value={"123456"} sx={{ color: "white" }} />
+              <Tab label="user 2" value={"654321"} sx={{ color: "white" }} />
             </Tabs>
           </Toolbar>
         </AppBar>

@@ -9,8 +9,8 @@ export const contacts: IContact[] = [
   },
   {
     id: "654321",
-    name: "Future Mrs Walker",
-    avatar: "W",
+    name: "contact 2",
+    avatar: "c2",
   },
 ];
 
