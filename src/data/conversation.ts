@@ -2,35 +2,29 @@ import { IMessage } from "../types/message";
 
 export const defaultConversation: IMessage[] = [
   {
-    message:
-      "message1 A significantly longer message to test how multiple line messages may work",
+    message: "fingers crosssed!",
     sender: "123456",
     recipient: "654321",
     timeStamp: new Date("06-09-2023 12:00:15"),
   },
   {
-    message: "message2 timestamped",
+    message: "Well good luck, I'd hire you!",
     sender: "654321",
     recipient: "123456",
-    timeStamp: new Date("06-09-2023 14:06:30"),
+    timeStamp: new Date("06-09-2023 12:06:30"),
   },
 
   {
-    message: "message1",
-    sender: "123456",
-    recipient: "654321",
-    timeStamp: new Date("06-09-2023 14:03:30"),
-  },
-  {
-    message: "message3",
+    message:
+      "A prospective employee only I'm afraid, have to see what they think of my work",
     sender: "123456",
     recipient: "654321",
     timeStamp: new Date("06-09-2023 12:00:10"),
   },
   {
-    message: "message3 weird that longer messages change this",
-    sender: "123456",
-    recipient: "654321",
+    message: "Hi there, so you work at Muzz? That's amazing",
+    recipient: "123456",
+    sender: "654321",
     timeStamp: new Date("06-08-2023 17:00"),
   },
 ];

@@ -1,10 +1,17 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext, useContext, useState } from "react";
 import { defaultConversation } from "../data/conversation";
 import { IMessage } from "../types/message";
 import { differenceInSeconds } from "date-fns";
 
-export const ChatContext = createContext({
+interface IChatContext {
+  sortedConversation: IMessage[] | [];
+  sendMessage: (message: IMessage) => void;
+}
+
+export const ChatContext = createContext<IChatContext>({
   sortedConversation: defaultConversation || [],
+  sendMessage: () => {},
 });
 
 export const useChat = () => {
@@ -26,5 +33,13 @@ const useChatStore = () => {
     sortConversation(defaultConversation)
   );
 
-  return { sortedConversation };
+  const sendMessage = (message: IMessage) => {
+    const newSortedConversation = sortConversation([
+      message,
+      ...sortedConversation,
+    ]);
+    setSortedConversation(newSortedConversation);
+  };
+
+  return { sortedConversation, sendMessage };
 };

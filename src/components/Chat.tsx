@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Box,
   Grid,
@@ -7,14 +8,27 @@ import {
   Typography,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import React from "react";
 import { differenceInSeconds, format } from "date-fns";
 import { useChat } from "../contexts/chat.context";
 
 export const Chat: React.FC = () => {
   const userId = "123456";
-  const { sortedConversation } = useChat();
-  console.log("chat", sortedConversation);
+  const contactId = "654321";
+
+  const [typedMessage, setTypedMessage] = useState<string>("");
+  const { sortedConversation, sendMessage } = useChat();
+
+  const handleSendMessage = () => {
+    const newMessage = {
+      sender: userId,
+      recipient: contactId,
+      timeStamp: new Date(),
+      message: typedMessage,
+    };
+    sendMessage(newMessage);
+    setTypedMessage("");
+  };
+
   return (
     <Grid
       container
@@ -33,12 +47,19 @@ export const Chat: React.FC = () => {
         <Grid item xs={10}>
           <Box pb={2} mr={3} pt={2}>
             <Paper elevation={3}>
-              <TextField multiline maxRows={2} fullWidth />
+              <TextField
+                autoFocus
+                multiline
+                maxRows={2}
+                fullWidth
+                value={typedMessage}
+                onChange={(e) => setTypedMessage(e.target.value)}
+              />
             </Paper>
           </Box>
         </Grid>
         <Grid item xs={1} pl={4}>
-          <IconButton>
+          <IconButton onClick={handleSendMessage}>
             <SendIcon sx={{ color: "rgb(251, 64, 108)" }} />
           </IconButton>
         </Grid>
@@ -71,7 +92,6 @@ export const Chat: React.FC = () => {
                   }}
                 >
                   {message.message}
-                  {format(message.timeStamp, "EEEE do HH:mm")}
                 </Typography>
                 <Typography
                   display={showTimeStamp ? "block" : "none"}
