@@ -34,6 +34,7 @@ export const Layout: React.FC<Props> = ({ children }) => {
             </Typography>
             {/* Purely for the purpose of sending messages back to the user */}
             <Tabs
+              sx={{ minWidth: 200 }}
               indicatorColor="primary"
               value={userId}
               onChange={(e, value) => {
