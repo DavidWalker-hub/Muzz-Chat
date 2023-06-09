@@ -3,9 +3,10 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Divider, Drawer, Grid, List } from "@mui/material";
+import { Divider, Drawer, Grid, List, Tab, Tabs } from "@mui/material";
 import { contacts } from "../data/contacts";
 import { Contact } from "./Contact";
+import { useChat } from "../contexts/chat.context";
 
 interface Props {
   children?: ReactNode;
@@ -13,6 +14,7 @@ interface Props {
 
 export const Layout: React.FC<Props> = ({ children }) => {
   const drawerWidth = 240;
+  const { userId, setUserId } = useChat();
 
   return (
     <>
@@ -30,6 +32,19 @@ export const Layout: React.FC<Props> = ({ children }) => {
             >
               Muzz Chat
             </Typography>
+            {/* Purely for the purpose of sending messages back to the user */}
+            <Tabs
+              indicatorColor="primary"
+              value={userId}
+              onChange={(e, value) => {
+                console.log("e", e.target);
+                console.log("value", value);
+                setUserId(value);
+              }}
+            >
+              <Tab label="user1" value={"123456"} />
+              <Tab label="user2" value={"654321"} />
+            </Tabs>
           </Toolbar>
         </AppBar>
         <Drawer

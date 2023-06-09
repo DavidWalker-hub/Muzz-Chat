@@ -11,6 +11,7 @@ interface IChatContext {
   sendMessage: (message: IMessage) => void;
   userId: IUser["id"];
   contactId: IUser["id"];
+  setUserId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const ChatContext = createContext<IChatContext>({
@@ -18,6 +19,7 @@ export const ChatContext = createContext<IChatContext>({
   sendMessage: () => {},
   userId: defaultUser.id,
   contactId: contacts[1].id,
+  setUserId: () => {},
 });
 
 export const useChat = () => {
@@ -48,5 +50,5 @@ const useChatStore = () => {
     setSortedConversation(newSortedConversation);
   };
 
-  return { sortedConversation, sendMessage, userId, contactId };
+  return { sortedConversation, sendMessage, userId, contactId, setUserId };
 };
