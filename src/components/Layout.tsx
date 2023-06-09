@@ -39,8 +39,6 @@ export const Layout: React.FC<Props> = ({ children }) => {
               TabIndicatorProps={{ sx: { color: "white" } }}
               value={userId}
               onChange={(e, value) => {
-                console.log("e", e.target);
-                console.log("value", value);
                 setUserId(value);
               }}
             >
