@@ -9,38 +9,40 @@ import {
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import React from "react";
+import { IMessage } from "../types/message";
+import { differenceInSeconds, format } from "date-fns";
 
-const messages = [
+const messages: IMessage[] = [
   {
     message:
       "message1 A significantly longer message to test how multiple line messages may work",
     sender: "123456",
     recipient: "654321",
-    timeStamp: new Date(),
+    timeStamp: new Date("06-09-2023 12:00"),
   },
-  {
-    message: "message2",
-    sender: "654321",
-    recipient: "123456",
-    timeStamp: new Date(),
-  },
+  //   {
+  //     message: "message2",
+  //     sender: "654321",
+  //     recipient: "123456",
+  //     timeStamp: new Date("06-09-2023 14:02"),
+  //   },
   {
     message: "message3",
     sender: "123456",
     recipient: "654321",
-    timeStamp: new Date(),
+    timeStamp: new Date("06-09-2023 12:02:10"),
   },
   {
     message: "message1",
     sender: "123456",
     recipient: "654321",
-    timeStamp: new Date(),
+    timeStamp: new Date("06-09-2023 14:03:30"),
   },
   {
-    message: "message2",
+    message: "message2 timestamped",
     sender: "654321",
     recipient: "123456",
-    timeStamp: new Date(),
+    timeStamp: new Date("06-09-2023 14:06:30"),
   },
   {
     message: "message3",
@@ -156,13 +158,14 @@ const messages = [
     message: "message3 weird that longer messages change this",
     sender: "123456",
     recipient: "654321",
-    timeStamp: new Date(),
+    timeStamp: new Date("06-08-2023 14:00"),
   },
 ];
 
 export const Chat: React.FC = () => {
   console.log("messages", messages);
   const userId = "123456";
+
   return (
     <Grid
       container
@@ -193,24 +196,42 @@ export const Chat: React.FC = () => {
       </Grid>
       <Grid item container xs={10} overflow={"scroll"} sx={{ height: "100%" }}>
         <Grid item container direction={"column-reverse"}>
-          {messages.map((message) => {
-            const userMessage = message.sender === userId;
+          {messages.map((message, i, messages) => {
+            const isUserMessage = message.sender === userId;
+            const timeGap = differenceInSeconds(
+              messages[i + 1]?.timeStamp,
+              message.timeStamp
+            );
+            const showTimeStamp = timeGap > 3600 || i === messages.length - 1;
+            const groupedMessage =
+              timeGap < 20 && message.sender === messages[i + 1].sender;
             return (
-              <Typography
-                alignSelf={userMessage ? "flex-end" : "flex-start"}
-                sx={{
-                  padding: 1,
-                  marginX: 2,
-                  borderRadius: userMessage
-                    ? "12px 12px 0 12px"
-                    : "12px 12px 12px 0",
-                  maxWidth: "60%",
-                  color: userMessage ? "white" : "black",
-                  backgroundColor: userMessage ? "#fb406c" : "#d9d7d7",
-                }}
-              >
-                {message.message}
-              </Typography>
+              <>
+                <Typography
+                  alignSelf={isUserMessage ? "flex-end" : "flex-start"}
+                  sx={{
+                    padding: 1,
+                    marginX: 2,
+                    marginTop: groupedMessage ? "2px" : "20px",
+                    borderRadius: isUserMessage
+                      ? "12px 12px 0 12px"
+                      : "12px 12px 12px 0",
+                    maxWidth: "60%",
+                    color: isUserMessage ? "white" : "black",
+                    backgroundColor: isUserMessage ? "#fb406c" : "#d9d7d7",
+                  }}
+                >
+                  {message.message}
+                  {format(message.timeStamp, "EEEE do HH:mm")}
+                </Typography>
+                <Typography
+                  display={showTimeStamp ? "block" : "none"}
+                  align="center"
+                  sx={{ fontSize: 13, marginTop: 2 }}
+                >
+                  {format(message.timeStamp, "EEEE do HH:mm")}
+                </Typography>
+              </>
             );
           })}
         </Grid>
