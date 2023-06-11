@@ -4,13 +4,11 @@ import { ChatProvider } from "./contexts/chat.context";
 
 function App() {
   return (
-    <>
-      <ChatProvider>
-        <Layout>
-          <Chat />
-        </Layout>
-      </ChatProvider>
-    </>
+    <ChatProvider>
+      <Layout>
+        <Chat />
+      </Layout>
+    </ChatProvider>
   );
 }
 

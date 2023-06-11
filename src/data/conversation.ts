@@ -13,7 +13,6 @@ export const defaultConversation: IMessage[] = [
     recipient: "123456",
     timeStamp: new Date("06-09-2023 12:06:30"),
   },
-
   {
     message:
       "A prospective employee only I'm afraid, have to see what they think of my work",

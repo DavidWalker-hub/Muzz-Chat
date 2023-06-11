@@ -14,7 +14,7 @@ interface Props {
 
 export const Layout: React.FC<Props> = ({ children }) => {
   const drawerWidth = 240;
-  const { userId, setUserId } = useChat();
+  const { userId, setUserId, setContactId } = useChat();
 
   return (
     <>
@@ -32,14 +32,17 @@ export const Layout: React.FC<Props> = ({ children }) => {
             >
               Muzz Chat
             </Typography>
-            {/* Purely for the purpose of sending messages back to the user */}
             <Tabs
               sx={{ minWidth: 200 }}
-              // indicatorColor="secondary"
               TabIndicatorProps={{ sx: { color: "white" } }}
               value={userId}
-              onChange={(e, value) => {
+              onChange={(_e, value) => {
                 setUserId(value);
+                if (value === "123456") {
+                  setContactId("654321");
+                } else if (value === "654321") {
+                  setContactId("123456");
+                }
               }}
             >
               <Tab label="user 1" value={"123456"} sx={{ color: "white" }} />

@@ -12,6 +12,7 @@ interface IChatContext {
   userId: IUser["id"];
   contactId: IUser["id"];
   setUserId: React.Dispatch<React.SetStateAction<string>>;
+  setContactId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const ChatContext = createContext<IChatContext>({
@@ -20,6 +21,7 @@ export const ChatContext = createContext<IChatContext>({
   userId: defaultUser.id,
   contactId: contacts[1].id,
   setUserId: () => {},
+  setContactId: () => {},
 });
 
 export const useChat = () => {
@@ -32,16 +34,15 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
 };
 
 const useChatStore = () => {
-  const sortConversation = (conversation: IMessage[]) => {
-    return conversation.sort((a, b) =>
-      differenceInSeconds(b.timeStamp, a.timeStamp)
-    );
-  };
+  const sortConversation = (conversation: IMessage[]) =>
+    conversation.sort((a, b) => differenceInSeconds(b.timeStamp, a.timeStamp));
+
   const [sortedConversation, setSortedConversation] = useState<IMessage[] | []>(
     sortConversation(defaultConversation)
   );
   const [userId, setUserId] = useState<IUser["id"]>(defaultUser.id);
-  const [contactId, setContactId] = useState<IUser["id"]>(defaultUser.id);
+  const [contactId, setContactId] = useState<IUser["id"]>(contacts[1].id);
+
   const sendMessage = (message: IMessage) => {
     const newSortedConversation = sortConversation([
       message,
@@ -50,5 +51,12 @@ const useChatStore = () => {
     setSortedConversation(newSortedConversation);
   };
 
-  return { sortedConversation, sendMessage, userId, contactId, setUserId };
+  return {
+    sortedConversation,
+    sendMessage,
+    userId,
+    contactId,
+    setUserId,
+    setContactId,
+  };
 };
